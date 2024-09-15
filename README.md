@@ -1,4 +1,4 @@
-# Terminal based GitHub profile explorer tool built in Go using Bubble Tea
+# Terminal based GitHub profile explorer
 
 GitHub Profile Explorer is a terminal-based application written in Go that allows users to interactively explore GitHub profiles, repositories, and file contents. This tool provides a user-friendly interface to navigate through GitHub data without leaving your terminal.
 
@@ -56,7 +56,7 @@ Before you begin, ensure you have the following installed:
    - '/': Enter search mode (when viewing repositories)
    - Ctrl+A: Select all (in file view)
    - Ctrl+C: Copy selected text (in file view)
-   - Ctrl+C: Deselect all (in file view)
+   - Ctrl+D: Deselect all (in file view)
    - PgUp/PgDown: Scroll file contents quickly
    - 'q': Quit the application
 
