@@ -2,6 +2,8 @@
 
 GitHub Profile Explorer is a terminal-based application written in Go that allows users to interactively explore GitHub profiles, repositories, and file contents. This tool provides a user-friendly interface to navigate through GitHub data without leaving your terminal.
 
+https://github.com/user-attachments/assets/08912ec0-903d-4d32-9886-a24737c4a542
+
 ## Features
 
 - **Profile Viewing**: Enter a GitHub username to view basic profile information.
