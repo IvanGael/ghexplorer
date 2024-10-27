@@ -30,13 +30,13 @@ func fetchGitHubProfile(username string) (*GitHubProfile, error) {
 }
 
 // fetchProfileReadme fetches the user's profile README.md content
-func fetchProfileReadme(username string) (string, error) {
-	content, err := fetchFileContent(username, username, "README.md")
-	if err != nil {
-		return "", err
-	}
-	return content, nil
-}
+// func fetchProfileReadme(username string) (string, error) {
+// 	content, err := fetchFileContent(username, username, "README.md")
+// 	if err != nil {
+// 		return "", err
+// 	}
+// 	return content, nil
+// }
 
 // fetchRepositories fetch github profile repositories with pagination
 func fetchRepositories(username string) ([]*Repository, error) {

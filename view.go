@@ -6,7 +6,6 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/muesli/reflow/wordwrap"
 )
 
 // View handles the CLI global view
@@ -112,19 +111,11 @@ func (m model) tabView() string {
 	return docStyle.Render(doc.String())
 }
 
-// overviewView handles the CLI overview view
+// overviewView handles the CLI overview view - simplified without README
 func (m model) overviewView() string {
 	if m.profile == nil {
 		return cardStyle.Render("Loading profile...")
 	}
-
-	// Calculate widths for split view
-	totalWidth := m.viewport.Width
-	profileWidth := totalWidth * 2 / 5           // 40% of width
-	readmeWidth := totalWidth - profileWidth - 4 // Remaining width minus padding
-
-	profileCardStyle = profileCardStyle.Width(profileWidth)
-	readmeStyle = readmeStyle.Width(readmeWidth)
 
 	// Profile information section
 	profileInfo := lipgloss.JoinVertical(
@@ -146,26 +137,7 @@ func (m model) overviewView() string {
 		),
 	)
 
-	// README section
-	readme := "Loading README..."
-	if m.readme != "" {
-		readme = m.readme
-	}
-
-	readmeSection := lipgloss.JoinVertical(
-		lipgloss.Left,
-		headerStyle.Render("Profile README"),
-		wordwrap.String(readme, readmeStyle.GetWidth()-4), // Account for padding
-	)
-
-	// Combine sections horizontally
-	content := lipgloss.JoinHorizontal(
-		lipgloss.Top,
-		profileCardStyle.Render(profileInfo),
-		readmeStyle.Render(readmeSection),
-	)
-
-	return content
+	return profileCardStyle.Render(profileInfo)
 }
 
 // repositoriesView handles the CLI repositories view
@@ -329,9 +301,7 @@ func (m model) searchView() string {
 				"",
 				valueStyle.Render(m.searchQuery),
 				"",
-				lipgloss.NewStyle().
-					Foreground(lipgloss.Color("241")).
-					Render("Press Enter to search • Esc to cancel"),
+				footerStyle.Render("Press Enter to search • Esc to cancel"),
 			),
 		),
 	)
@@ -347,9 +317,7 @@ func (m model) errorView() string {
 				"",
 				valueStyle.Render(m.errorMessage),
 				"",
-				lipgloss.NewStyle().
-					Foreground(lipgloss.Color("241")).
-					Render("Press any key to go back"),
+				footerStyle.Render("Press 'q' key to quit"),
 			),
 		),
 	)

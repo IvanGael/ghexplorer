@@ -65,9 +65,9 @@ var (
 			Foreground(lipgloss.Color("255"))
 
 	// README styles
-	readmeStyle = lipgloss.NewStyle().
-			Border(lipgloss.RoundedBorder()).
-			BorderForeground(lipgloss.Color("63")).
-			Padding(1).
-			Width(60)
+	// readmeStyle = lipgloss.NewStyle().
+	// 		Border(lipgloss.RoundedBorder()).
+	// 		BorderForeground(lipgloss.Color("63")).
+	// 		Padding(1).
+	// 		Width(60)
 )

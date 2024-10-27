@@ -35,7 +35,6 @@ type model struct {
 	inputting    bool
 	profile      *GitHubProfile
 	repositories []*Repository
-	readme       string
 	currentView  string
 	cursor       int
 	selected     map[string]string
@@ -63,7 +62,7 @@ func initialModel() model {
 	s.Spinner = spinner.Dot
 	s.Style = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
 
-	vp := viewport.New(80, 20) // Default size, will be adjusted later
+	vp := viewport.New(80, 20)
 	vp.YPosition = headerHeight
 
 	return model{

@@ -19,9 +19,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "tab":
 			if m.currentView == "profile" || m.currentView == "repositories" {
 				m.activeTab = (m.activeTab + 1) % len(m.tabs)
-				if m.activeTab == 0 {
+				switch m.activeTab {
+				case 0:
 					m.currentView = "profile"
-				} else {
+				case 1:
 					m.currentView = "repositories"
 				}
 			}
@@ -195,14 +196,6 @@ func (m model) fetchProfile() tea.Msg {
 	if err != nil {
 		return err
 	}
-
-	// Fetch README in a goroutine to avoid blocking
-	go func() {
-		readme, _ := fetchProfileReadme(m.githubID)
-		if readme != "" {
-			m.readme = readme
-		}
-	}()
 
 	return *profile
 }
