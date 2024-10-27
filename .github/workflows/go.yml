@@ -23,12 +23,11 @@ jobs:
         go-version: 1.23.1
     
     - name: Build
-      run: go build -v ./... -o Git-CLI.exe
+      run: go build -v ./... 
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          Git-CLI
-          Git-CLI.exe
+          *.exe
 
