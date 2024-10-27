@@ -1,8 +1,8 @@
-# Terminal based GitHub profile explorer
+# GitHub Profile Explorer CLI
 
-GitHub Profile Explorer is a terminal-based application written in Go that allows users to interactively explore GitHub profiles, repositories, and file contents. This tool provides a user-friendly interface to navigate through GitHub data without leaving your terminal.
+GitHub Profile Explorer is a terminal-based application written in Go that allows users to interactively explore GitHub profiles, repositories, and file contents. This tool provides a user-friendly interface to navigate through GitHub Profile without leaving your terminal.
 
-https://github.com/user-attachments/assets/08912ec0-903d-4d32-9886-a24737c4a542
+https://github.com/user-attachments/assets/1e924e81-da79-40e3-bbf6-798ff6998388
 
 ## Features
 
@@ -62,18 +62,9 @@ Before you begin, ensure you have the following installed:
    - PgUp/PgDown: Scroll file contents quickly
    - 'q': Quit the application
 
-## Views
-
-1. **Input View**: Enter a GitHub username.
-2. **Profile View**: Displays basic user information.
-3. **Repositories View**: Lists user's repositories.
-4. **Files View**: Shows contents of a selected repository.
-5. **File Content View**: Displays the content of a selected file.
-6. **Search View**: Allows searching for repositories.
-
 ## Customization
 
-You can customize the colors used in the application by modifying the `lipgloss` styles in the `main.go` file:
+You can make any customization regarding styles or colors used in the application by modifying the `config.go` file:
 
 ```go
 var (
