@@ -1,22 +1,50 @@
-package main
+package github_api
 
 import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"ghexplorer/config"
+
+	"io"
 	"net/http"
 	"net/url"
 )
 
-// fetchGitHubProfile fetch github profile
-func fetchGitHubProfile(username string) (*GitHubProfile, error) {
-	url := fmt.Sprintf("%s/users/%s", config.GithubAPIBaseURL, username)
-	resp, err := http.Get(url)
+// GitHubProfile is GitHub profile struct
+type GitHubProfile struct {
+	Name        string `json:"name"`
+	Login       string `json:"login"`
+	Description string `json:"bio"`
+	Followers   int    `json:"followers"`
+	Following   int    `json:"following"`
+}
+
+// Repository is GitHub profile repository struct
+type Repository struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+}
+
+// FileInfo is GitHub profile repository file info struct
+type FileInfo struct {
+	Name string `json:"name"`
+	Type string `json:"type"`
+}
+
+// FetchGitHubProfile fetch GitHub profile
+func FetchGitHubProfile(username string) (*GitHubProfile, error) {
+	customUrl := fmt.Sprintf("%s/users/%s", config.GithubAPIBaseURL, username)
+	resp, err := http.Get(customUrl)
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+
+		}
+	}(resp.Body)
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("failed to fetch profile: %s", resp.Status)
@@ -39,27 +67,33 @@ func fetchGitHubProfile(username string) (*GitHubProfile, error) {
 // 	return content, nil
 // }
 
-// fetchRepositories fetch github profile repositories with pagination
-func fetchRepositories(username string) ([]*Repository, error) {
+// FetchRepositories fetch GitHub profile repositories with pagination
+func FetchRepositories(username string) ([]*Repository, error) {
 	var allRepos []*Repository
 	page := 1
 	perPage := 100 // Maximum allowed by GitHub API
 
 	for {
-		url := fmt.Sprintf("%s/users/%s/repos?page=%d&per_page=%d", config.GithubAPIBaseURL, username, page, perPage)
-		resp, err := http.Get(url)
+		customUrl := fmt.Sprintf("%s/users/%s/repos?page=%d&per_page=%d", config.GithubAPIBaseURL, username, page, perPage)
+		resp, err := http.Get(customUrl)
 		if err != nil {
 			return nil, err
 		}
 
 		if resp.StatusCode != http.StatusOK {
-			resp.Body.Close()
+			err := resp.Body.Close()
+			if err != nil {
+				return nil, err
+			}
 			return nil, fmt.Errorf("failed to fetch repositories: %s", resp.Status)
 		}
 
 		var repos []*Repository
 		err = json.NewDecoder(resp.Body).Decode(&repos)
-		resp.Body.Close()
+		errResp := resp.Body.Close()
+		if errResp != nil {
+			return nil, err
+		}
 
 		if err != nil {
 			return nil, err
@@ -82,14 +116,19 @@ func fetchRepositories(username string) ([]*Repository, error) {
 	return allRepos, nil
 }
 
-// fetchRepositoryContents fetch github profile repository contents
-func fetchRepositoryContents(username, repo, path string) ([]*FileInfo, error) {
-	url := fmt.Sprintf("%s/repos/%s/%s/contents/%s", config.GithubAPIBaseURL, username, repo, path)
-	resp, err := http.Get(url)
+// FetchRepositoryContents fetch GitHub profile repository contents
+func FetchRepositoryContents(username, repo, path string) ([]*FileInfo, error) {
+	customUrl := fmt.Sprintf("%s/repos/%s/%s/contents/%s", config.GithubAPIBaseURL, username, repo, path)
+	resp, err := http.Get(customUrl)
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+
+		}
+	}(resp.Body)
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("failed to fetch repository contents: %s", resp.Status)
@@ -103,14 +142,19 @@ func fetchRepositoryContents(username, repo, path string) ([]*FileInfo, error) {
 	return contents, nil
 }
 
-// fetchFileContent fetch github profile repository file contents
-func fetchFileContent(username, repo, path string) (string, error) {
-	url := fmt.Sprintf("%s/repos/%s/%s/contents/%s", config.GithubAPIBaseURL, username, repo, path)
-	resp, err := http.Get(url)
+// FetchFileContent fetch GitHub profile repository file contents
+func FetchFileContent(username, repo, path string) (string, error) {
+	customUrl := fmt.Sprintf("%s/repos/%s/%s/contents/%s", config.GithubAPIBaseURL, username, repo, path)
+	resp, err := http.Get(customUrl)
 	if err != nil {
 		return "", err
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+
+		}
+	}(resp.Body)
 
 	if resp.StatusCode != http.StatusOK {
 		return "", fmt.Errorf("failed to fetch file content: %s", resp.Status)
@@ -135,14 +179,19 @@ func fetchFileContent(username, repo, path string) (string, error) {
 	return fileContent.Content, nil
 }
 
-// searchRepositories perform searching through github profile repositories
-func searchRepositories(username, query string) ([]*Repository, error) {
-	url := fmt.Sprintf("%s/search/repositories?q=%s+user:%s", config.GithubAPIBaseURL, url.QueryEscape(query), username)
-	resp, err := http.Get(url)
+// SearchRepositories perform searching through GitHub profile repositories
+func SearchRepositories(username, query string) ([]*Repository, error) {
+	customUrl := fmt.Sprintf("%s/search/repositories?q=%s+user:%s", config.GithubAPIBaseURL, url.QueryEscape(query), username)
+	resp, err := http.Get(customUrl)
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+
+		}
+	}(resp.Body)
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("failed to search repositories: %s", resp.Status)

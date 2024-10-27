@@ -1,6 +1,6 @@
-# GitHub Profile Explorer CLI
+# ghexplorer
 
-GitHub Profile Explorer is a terminal-based application written in Go that allows users to interactively explore GitHub profiles, repositories, and file contents. This tool provides a user-friendly interface to navigate through GitHub Profile without leaving your terminal.
+ghexplorer is a terminal-based application written in Go that allows users to interactively explore GitHub profiles, repositories, and file contents. This tool provides a user-friendly interface to navigate through GitHub Profile without leaving your terminal.
 
 https://github.com/user-attachments/assets/6aa06a4f-628c-4f5c-8491-8c3fd35ba060
 
@@ -26,8 +26,8 @@ Before you begin, ensure you have the following installed:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/IvanGael/Git_CLI_Explorer.git
-   cd Git_CLI_Explorer
+   git clone https://github.com/IvanGael/ghexplorer.git
+   cd ghexplorer
    ```
 
 2. Install the required dependencies:
@@ -35,23 +35,56 @@ Before you begin, ensure you have the following installed:
    go get github.com/charmbracelet/bubbletea
    go get github.com/charmbracelet/lipgloss
    go get github.com/atotto/clipboard
+   go get -u github.com/spf13/cobra
+   go get "github.com/stretchr/testify/assert"
    ```
 
 3. Build the application:
    ```
-   go build
+   go build .
    ```
 
 ## Usage
 
 1. Run the application:
+- Start TUI with empty input
    ```
-   ./github-profile-explorer
+   ghexplorer explore
+   ```
+- Start TUI with pre-filled username
+   ```
+   ghexplorer explore USERNAME
    ```
 
-2. Enter a GitHub username when prompted.
+2. Repository information:
+- Get repo info in text format
+   ```
+   ghexplorer repo USERNAME REPOSITORY_NAME
+   ```
+- Get repo info in JSON format
+   ```
+   ghexplorer repo USERNAME REPOSITORY_NAME -f json
+   ```
+- Save repo info to file
+   ```
+   ghexplorer repo USERNAME REPOSITORY_NAME -o repo.txt
+   ```
 
-3. Use the following keyboard shortcuts to navigate:
+3. Search repositories:
+- Search repos in text format
+   ```
+   ghexplorer search USERNAME REPO_SEARCH
+   ```
+- Search repos in JSON format
+   ```
+   ghexplorer search USERNAME REPO_SEARCH -f json
+   ```
+- Save search results to file
+   ```
+   ghexplorer search USERNAME REPO_SEARCH -o search.txt
+   ```
+
+4. Use the following keyboard shortcuts to navigate:
    - Arrow keys: Move cursor / Scroll file contents
    - Enter: Select / Open
    - Esc: Go back / Exit selection mode

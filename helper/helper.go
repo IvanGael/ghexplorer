@@ -1,7 +1,7 @@
-package main
+package helper
 
-// stringOrNA handle potentially nil strings
-func stringOrNA(s string) string {
+// StringOrNA handle potentially nil strings
+func StringOrNA(s string) string {
 	if s == "" {
 		return "N/A"
 	}

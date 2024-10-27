@@ -1,67 +1,67 @@
-package main
+package config
 
 import (
 	"github.com/charmbracelet/lipgloss"
 )
 
 const (
-	githubAPIBaseURL = "https://api.github.com"
-	headerHeight     = 3
-	footerHeight     = 2
+	GithubAPIBaseURL = "https://api.github.com"
+	HeaderHeight     = 3
+	FooterHeight     = 2
 )
 
 const (
-	itemsPerPage    = 10
-	paginationStyle = "• %d/%d •"
+	ItemsPerPage    = 10
+	PaginationStyle = "• %d/%d •"
 )
 
 var (
-	repositoryStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#00ffff"))
-	folderStyle     = lipgloss.NewStyle().Foreground(lipgloss.Color("33"))
-	fileStyle       = lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF80"))
-	selectedStyle   = lipgloss.NewStyle().Background(lipgloss.Color("205")).Foreground(lipgloss.Color("#00000"))
-	errorStyle      = lipgloss.NewStyle().Foreground(lipgloss.Color("#FF3333"))
-	tabStyle        = lipgloss.NewStyle().Border(lipgloss.NormalBorder(), true, true, false, true).Padding(0, 1)
-	activeTabStyle  = tabStyle.Border(lipgloss.DoubleBorder(), true, true, false, true)
+	RepositoryStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#00ffff"))
+	FolderStyle     = lipgloss.NewStyle().Foreground(lipgloss.Color("33"))
+	FileStyle       = lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF80"))
+	SelectedStyle   = lipgloss.NewStyle().Background(lipgloss.Color("205")).Foreground(lipgloss.Color("#00000"))
+	ErrorStyle      = lipgloss.NewStyle().Foreground(lipgloss.Color("#FF3333"))
+	TabStyle        = lipgloss.NewStyle().Border(lipgloss.NormalBorder(), true, true, false, true).Padding(0, 1)
+	ActiveTabStyle  = TabStyle.Border(lipgloss.DoubleBorder(), true, true, false, true)
 )
 
-var useHighPerformanceRenderer = false
+var UseHighPerformanceRenderer = false
 
 var (
-	// Layout styles
-	docStyle = lipgloss.NewStyle().Padding(1, 2)
+	// DocStyle Layout styles
+	DocStyle = lipgloss.NewStyle().Padding(1, 2)
 
-	// Card styles
-	cardStyle = lipgloss.NewStyle().
+	// CardStyle Card styles
+	CardStyle = lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
 			BorderForeground(lipgloss.Color("63")).
 			Padding(1)
 
-	// Profile card styles
-	profileCardStyle = cardStyle.BorderForeground(lipgloss.Color("87"))
+	// ProfileCardStyle Profile card styles
+	ProfileCardStyle = CardStyle.BorderForeground(lipgloss.Color("87"))
 
-	// Header styles
-	headerStyle = lipgloss.NewStyle().
+	// HeaderStyle Header styles
+	HeaderStyle = lipgloss.NewStyle().
 			Foreground(lipgloss.Color("87")).
 			Bold(true).
 			Padding(0, 1)
 
-	// Footer styles
-	footerStyle = lipgloss.NewStyle().
+	// FooterStyle Footer styles
+	FooterStyle = lipgloss.NewStyle().
 			Foreground(lipgloss.Color("241"))
 
-	// Pagination styles
-	paginationInfoStyle = lipgloss.NewStyle().
+	// PaginationInfoStyle Pagination styles
+	PaginationInfoStyle = lipgloss.NewStyle().
 				Foreground(lipgloss.Color("241")).
 				Align(lipgloss.Center)
 
-	// Label styles
-	labelStyle = lipgloss.NewStyle().
+	// LabelStyle Label styles
+	LabelStyle = lipgloss.NewStyle().
 			Foreground(lipgloss.Color("241")).
 			Width(10)
 
-	// Value styles
-	valueStyle = lipgloss.NewStyle().
+	// ValueStyle Valus styles
+	ValueStyle = lipgloss.NewStyle().
 			Foreground(lipgloss.Color("255"))
 
 	// README styles
