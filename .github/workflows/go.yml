@@ -1,13 +1,11 @@
 # This workflow will build a golang project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
 
-name: Build and Release
+name: Build, Test, and Release
 
 on:
   push:
     branches: [ "main" ]
-    tags:
-      - 'v*'
   pull_request:
     branches: [ "main" ]
 
@@ -26,12 +24,29 @@ jobs:
     
     - name: Build
       run: go build -v ./... 
+
     - name: Test
-      run: go test -v ./... 
+      run: go test -v ./...
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
     - name: Create Release
-      uses: softprops/action-gh-release@v1
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        files: |
-          ghexplorer
-          ghexplorer.exe
+        tag_name: v${{ github.run_number }}
+        release_name: Release ${{ github.run_number }}
+        body: |
+          Release V1
+        draft: false
+        prerelease: false
 
