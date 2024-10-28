@@ -6,6 +6,8 @@ name: Build and Release
 on:
   push:
     branches: [ "main" ]
+    tags:
+      - 'v*'
   pull_request:
     branches: [ "main" ]
 
@@ -26,4 +28,10 @@ jobs:
       run: go build -v ./... 
     - name: Test
       run: go test -v ./... 
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          ghexplorer
+          ghexplorer.exe
 
