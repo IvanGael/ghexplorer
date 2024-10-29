@@ -5,13 +5,14 @@ import (
 	"ghexplorer/config"
 	"ghexplorer/github_api"
 	"ghexplorer/helper"
+	"strings"
+
 	"github.com/atotto/clipboard"
 	"github.com/charmbracelet/bubbles/spinner"
 	"github.com/charmbracelet/bubbles/textinput"
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"strings"
 )
 
 // Model is the base model
@@ -45,7 +46,7 @@ func InitialModel(initialGithubID string) Model {
 
 	s := spinner.New()
 	s.Spinner = spinner.Dot
-	s.Style = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
+	s.Style = config.SpinnerStyle
 
 	vp := viewport.New(80, 20)
 	vp.YPosition = config.HeaderHeight

@@ -23,6 +23,7 @@ var (
 	ErrorStyle      = lipgloss.NewStyle().Foreground(lipgloss.Color("#FF3333"))
 	TabStyle        = lipgloss.NewStyle().Border(lipgloss.NormalBorder(), true, true, false, true).Padding(0, 1)
 	ActiveTabStyle  = TabStyle.Border(lipgloss.DoubleBorder(), true, true, false, true)
+	SpinnerStyle    = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
 )
 
 var UseHighPerformanceRenderer = false
